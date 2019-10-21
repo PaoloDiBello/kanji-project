@@ -22,23 +22,22 @@ export function* doGetItems() {
 }
 
 
-export function* doGetSingleItem({ payload }) {
+export function* watchGetSingleItem() {
+  yield takeEvery(actions.GET_SINGLE_ITEM, doGetSingleItem);
+}
 
-    const result = yield call(ItemsHelper.getSingleItem, payload);
-  
-    if (result) {
-      yield put({
-        type: actions.GET_SINGLE_ITEM_SUCCESS,
-        payload: result.response
-      })
-    }
-  }
-  
-  
-  export function* watchGetSingleIssue() {
-    yield takeEvery(actions.GET_SINGLE_ITEM, doGetSingleItem);
-  
-  }
+export function* doGetSingleItem() {
+  var item = [];
+  const response = yield call(ItemsHelper.getSingleItem);
+  item = yield buildStateItems(response);
+  console.log('item', item)
+  yield put({
+    type: actions.GET_SINGLE_ITEM_SUCCESS,
+    payload: item,
+  });
+}
+
+
 
 
 export default function* rootSaga() {
