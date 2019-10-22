@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText, Typography, Link } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 
+import Image from 'material-ui-image';
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -51,22 +53,28 @@ const Item = ({ item, history }) => {
                 >
                   Radical: {radical.character}
                 </Typography>
-                <Link
-                  component="button"
-                  variant="body2"
-                  onClick={() => {
-                    history.push(`/info/${kanji.character}`);
-                  }}
-                >
-                  Show more
-                </Link>
               </>
             ) : (
               <>
-                <Skeleton width="30%" />
-                <Skeleton width="30%" />
+                <Skeleton />
+                <Skeleton />
               </>
             )}
+
+            {item ? (
+              <Link
+                component="button"
+                variant="body2"
+                onClick={() => {
+                  history.push(`/info/${kanji.character}`);
+                }}
+              >
+                Show more
+              </Link>
+            ) : (
+              <Skeleton width="30%" />
+            )}
+
           </React.Fragment>
         }
       />

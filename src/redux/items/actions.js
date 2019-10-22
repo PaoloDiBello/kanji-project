@@ -30,11 +30,12 @@ const itemsActions = {
       };
     },
     
-    getSingleItem: (name) => {
+    getSingleItem: (name, history) => {
       return (dispatch, getState) => {
         dispatch({
           type: itemsActions.GET_SINGLE_ITEM,
-          payload: name
+          payload: name,
+          history
         });
       };
   }

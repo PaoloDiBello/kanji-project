@@ -23,7 +23,7 @@ export function* watchGetSingleItem() {
   yield takeEvery(actions.GET_SINGLE_ITEM, doGetSingleItem);
 }
 
-export function* doGetSingleItem({payload}) {
+export function* doGetSingleItem({payload, history}) {
   var item = [];
   const response = yield call(ItemsHelper.getSingleItem, payload );
 
@@ -37,6 +37,7 @@ export function* doGetSingleItem({payload}) {
       type: actions.GET_SINGLE_ITEM_FAILED,
     });
 
+      history.push('/404')
   }
 
 }

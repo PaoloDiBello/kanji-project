@@ -3,13 +3,20 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
+import Spinner from '../Spinner.jsx'
+
 import { connect } from "react-redux";
 
 import itemsActions from "../../redux/items/actions";
 
+import {selectItems, selectLoadingItems} from '../../redux/items/selectors'
+
 import Item from "./Item";
+import { createStructuredSelector } from "reselect";
 
 const { getItems } = itemsActions;
+
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +34,7 @@ const PaperSheet = ({ items, getItems, loading, history }) => {
   return (
     <Paper className={classes.root}>
       <Typography variant="h5" component="h3">
-        List of items
+        List of items {loading && <Spinner/>}
       </Typography>
 
       {(loading ? Array.from(new Array(3)) : items).map((item, index) => (
@@ -37,9 +44,9 @@ const PaperSheet = ({ items, getItems, loading, history }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  items: state.Items.items,
-  loading: state.Items.loadingItems
+const mapStateToProps = createStructuredSelector ({
+  items: selectItems,
+  loading: selectLoadingItems
 });
 
 const mapDispatchToProps = {
