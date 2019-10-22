@@ -12,6 +12,7 @@ import itemsActions from "../../redux/items/actions";
 import {selectItems, selectLoadingItems} from '../../redux/items/selectors'
 
 import Item from "./Item";
+import {Header, Footer} from '../Layouts/index'
 import { createStructuredSelector } from "reselect";
 
 const { getItems } = itemsActions;
@@ -40,6 +41,7 @@ const PaperSheet = ({ items, getItems, loading, history }) => {
       {(loading ? Array.from(new Array(3)) : items).map((item, index) => (
         <Item item={item} key={index} history={history}></Item>
       ))}
+
     </Paper>
   );
 };
