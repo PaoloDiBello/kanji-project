@@ -10,15 +10,12 @@ export function* watchGetItems() {
 }
 
 export function* doGetItems() {
-  var items = [];
   const response = yield call(ItemsHelper.getItems);
-  items = yield buildStateItems(response);
-  console.log('items', items)
-  yield console.log('items.length', items.length)
   yield put({
     type: actions.GET_ITEMS_SUCCESS,
-    payload: items,
+    payload: response,
   });
+  
 }
 
 
@@ -26,15 +23,22 @@ export function* watchGetSingleItem() {
   yield takeEvery(actions.GET_SINGLE_ITEM, doGetSingleItem);
 }
 
-export function* doGetSingleItem() {
+export function* doGetSingleItem({payload}) {
   var item = [];
-  const response = yield call(ItemsHelper.getSingleItem);
-  item = yield buildStateItems(response);
-  console.log('item', item)
-  yield put({
-    type: actions.GET_SINGLE_ITEM_SUCCESS,
-    payload: item,
-  });
+  const response = yield call(ItemsHelper.getSingleItem, payload );
+
+  if(!response.error){
+    yield put({
+      type: actions.GET_SINGLE_ITEM_SUCCESS,
+      payload: response,
+    });
+  } else {
+    yield put({
+      type: actions.GET_SINGLE_ITEM_FAILED,
+    });
+
+  }
+
 }
 
 

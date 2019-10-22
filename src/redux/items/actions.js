@@ -6,7 +6,11 @@ const itemsActions = {
     GET_ITEMS: "GET_ITEMS",
     GET_ITEMS_SUCCESS: "GET_ITEMS_SUCCESS",
   
-  
+    GET_SINGLE_ITEM: "GET_SINGLE_ITEM",
+    GET_SINGLE_ITEM_SUCCESS: "GET_SINGLE_ITEM_SUCCESS",  
+    GET_SINGLE_ITEM_FAILED: "GET_SINGLE_ITEM_FAILED",  
+
+
   
     changeItemsType: type => {
       return (dispatch, getState) => {
@@ -21,10 +25,21 @@ const itemsActions = {
     getItems: () => {
       return (dispatch, getState) => {
         dispatch({
-          type: itemsActions.GET_ITEMS,
+          type: itemsActions.GET_ITEMS
         });
       };
     },
-  
-  };
+    
+    getSingleItem: (name) => {
+      return (dispatch, getState) => {
+        dispatch({
+          type: itemsActions.GET_SINGLE_ITEM,
+          payload: name
+        });
+      };
+  }
+
+  }
+
+
   export default itemsActions;

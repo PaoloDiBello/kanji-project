@@ -1,54 +1,52 @@
-import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import React, { useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
 
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
-import itemsActions from '../../redux/items/actions'
-import { ListItem, List } from '@material-ui/core';
+import itemsActions from "../../redux/items/actions";
 
-import Item from './Item'
+import Item from "./Item";
 
-
-const {getItems} = itemsActions
+const { getItems } = itemsActions;
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(3, 2),
-  },
+    padding: theme.spacing(3, 2)
+  }
 }));
 
-
-const PaperSheet = ({items}) => {
+const PaperSheet = ({ items, getItems, loading, history }) => {
   const classes = useStyles();
 
   useEffect(() => {
-  getItems();
-  }, [])
+    getItems();
+  }, [getItems]);
 
   return (
-    <div>
-      <Paper className={classes.root}>
-        <Typography variant="h5" component="h3">
-            List of items
-        </Typography>
-        <Typography component="p">
-          
-          {items.map(item=><Item item={item.name}></Item>)}
-        </Typography>
-      </Paper>
-    </div>
-  );
-}
+    <Paper className={classes.root}>
+      <Typography variant="h5" component="h3">
+        List of items
+      </Typography>
 
-const mapStateToProps = (state) => ({
-    items: state.Items.items
-})
+      {(loading ? Array.from(new Array(3)) : items).map((item, index) => (
+        <Item item={item} key={index} history={history}></Item>
+      ))}
+    </Paper>
+  );
+};
+
+const mapStateToProps = state => ({
+  items: state.Items.items,
+  loading: state.Items.loadingItems
+});
 
 const mapDispatchToProps = {
   getItems
-}
+};
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(PaperSheet);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaperSheet);
