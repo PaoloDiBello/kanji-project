@@ -29,21 +29,21 @@ if(item.kanji){
     var kanjiObject = item.kanji;
     var {character, meaning: {english}, strokes, onyomi, kunyomi, video} = kanjiObject;
 
-
 //    var {kanji: {character, meaning: {english: meaningEnglish}, stokes: {count: numStrokes}}}= item;  
   //  var {kanji: {onyomi: {romaji:romajiOnyomi, katakana}, kunyomi: {romaji:romajiKunyomi, hiragana}}} = item
 }
 
 
-    if(!loading){
+    if(!loading && item.kanji){
         return (
             <div>
                 {english}
                 {character}
 
-                <img></img>
+                <img src={video.poster} alt="" style={{maxWidth: '50px'}}/>
                 <Link
                   component="button"
+
                   variant="body2"
                   display="block"
                   onClick={() => {
