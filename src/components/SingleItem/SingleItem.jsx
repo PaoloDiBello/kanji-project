@@ -147,10 +147,9 @@ const SingleItem = ({ match, item, loading, getSingleItem, history }) => {
           <Typography paragraph>Examples:</Typography>
 
 
-{item?(item.examples.map(example=>{
-    {example.japanese}
-})):<></>
+{item.kanji?item.examples.map(example => (<Typography>{`${example.japanese} ${example.meaning.english}`}</Typography>)):<></>
 }
+
           <Typography>
           "japanese": "一番（いちばん）",
           "english": "number one"
