@@ -12,7 +12,7 @@ constructor(props) {
     }
 }
 
-      reload = () => {
+    reload = () => {
         setState({ show: false })
         setTimeout(() => setState(state => ({ count: state.count + 1, show: true })), 500)
       }

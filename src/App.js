@@ -1,7 +1,7 @@
 import React, {lazy, Suspense} from 'react';
 import './App.css';
 
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 
 const ListItems = (
@@ -25,9 +25,8 @@ const NotFound = (
 
 function App() {
 
-
   return (
-      <BrowserRouter>
+      <Router>
       <Suspense fallback={<>loading..</>}>
         <Switch>
         <Route exact path="/info/:item" component={SingleItem} />
@@ -36,7 +35,7 @@ function App() {
         <Route path="*" component={NotFound} />
         </Switch>
         </Suspense>
-      </BrowserRouter>
+      </Router>
   );
 }
 

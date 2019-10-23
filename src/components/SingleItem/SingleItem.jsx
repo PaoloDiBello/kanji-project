@@ -3,10 +3,7 @@ import React, { useEffect } from "react";
 import itemsActions from "../../redux/items/actions";
 
 import { connect } from "react-redux";
-import { Link } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
-
-import Spinner from "../Spinner.jsx";
 
 const { getSingleItem } = itemsActions;
 
@@ -34,9 +31,6 @@ const SingleItem = ({ match, item, loading, getSingleItem, history }) => {
 
     //    var {kanji: {character, meaning: {english: meaningEnglish}, stokes: {count: numStrokes}}}= item;
     //  var {kanji: {onyomi: {romaji:romajiOnyomi, katakana}, kunyomi: {romaji:romajiKunyomi, hiragana}}} = item
-  
-
-
 }
 
   if (!loading && item.kanji) {
@@ -46,22 +40,11 @@ const SingleItem = ({ match, item, loading, getSingleItem, history }) => {
         {character}
 
         <img src={video.poster} alt="" style={{ maxWidth: "50px" }} />
-        <Link
-          component="button"
-          variant="body2"
-          display="block"
-          onClick={() => {
-            history.push(`/`);
-          }}
-        >
-          Go home
-        </Link>
       </div>
     );
   } else {
     return (
       <>
-        <Spinner />
         <Skeleton width="40%" />
         <Skeleton width="40%" />
       </>

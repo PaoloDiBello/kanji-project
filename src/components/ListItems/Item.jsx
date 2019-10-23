@@ -74,7 +74,6 @@ const Item = ({ item, history }) => {
             ) : (
               <Skeleton width="30%" />
             )}
-
           </React.Fragment>
         }
       />

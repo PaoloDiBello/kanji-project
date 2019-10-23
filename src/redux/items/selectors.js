@@ -7,6 +7,17 @@ export const selectItems = createSelector(
     (Items) => Items.items
 );
 
+
+Object.defineProperty(Array.prototype, 'chunk', {value: function(n) {
+    return Array.from(Array(Math.ceil(this.length/n)), (_,i)=>this.slice(i*n,i*n+n));
+}});
+
+
+export const selectItemsChunk = createSelector(
+    [selectItems],
+    (items) => items.chunk(3) 
+);
+
 export const selectLoadingItems = createSelector(
     [selectItemsState],
     (Items) => Items.loadingItems

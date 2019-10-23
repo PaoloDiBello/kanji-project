@@ -2,11 +2,14 @@
   "name": "kanji-project",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://paolodibello.github.io/kanji-project",
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.29",
+    "gh-pages": "^2.1.1",
     "i": "^0.3.6",
+    "material-ui-flat-pagination": "^4.0.0",
     "material-ui-image": "^3.2.2",
     "material-ui-not-found": "^0.1.0",
     "npm": "^6.12.0",
@@ -24,6 +27,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",    
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
