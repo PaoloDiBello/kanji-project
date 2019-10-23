@@ -1,82 +1,41 @@
 import React from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
 
-import { ListItem, ListItemText, Typography, Link } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 
-//import Image from 'material-ui-image';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
-  },
-  inline: {
-    display: "inline"
-  },
-  block: {
-    display: "block"
-  }
-}));
-
 const Item = ({ item, history }) => {
-  const classes = useStyles();
-
   if (item) {
     var { kanji, radical } = item;
   }
 
   return (
-    <ListItem alignItems="flex-start">
+    <ListItem>
+      <ListItemAvatar>
+        <Avatar>{item ? kanji.character : <Skeleton />}</Avatar>
+      </ListItemAvatar>
       <ListItemText
-        primary={item ? kanji.character : <Skeleton />}
-        secondary={
-          <React.Fragment>
-            {item ? (
-              <>
-                <Typography
-                  component="p"
-                  variant="p1"
-                  className={classes.block}
-                  color="textPrimary"
-                >
-                  Strokes: {kanji.stroke}
-                </Typography>
-
-                <Typography
-                  component="p"
-                  variant="p2"
-                  className={classes.block}
-                  color="textPrimary"
-                >
-                  Radical: {radical.character}
-                </Typography>
-              </>
-            ) : (
-              <>
-                <Skeleton />
-                <Skeleton />
-              </>
-            )}
-
-            {item ? (
-              <Link
-                component="button"
-                variant="body2"
-                onClick={() => {
-                  history.push(`/info/${kanji.character}`);
-                }}
-              >
-                Show more
-              </Link>
-            ) : (
-              <Skeleton width="30%" />
-            )}
-          </React.Fragment>
-        }
+        primary={item ? kanji.character : <Skeleton width="20%" />}
+        secondary={item ? `Number strokes: ${kanji.stroke}` : <Skeleton width="80%" />}
       />
+      {item ? (
+        <Button
+          variant="outlined"
+          size="small"
+          color="primary"
+          onClick={() => {
+            history.push(`/info/${kanji.character}`);
+          }}
+        >
+          Show more
+        </Button>
+      ) : (
+        <Skeleton width="30%" />
+      )}
     </ListItem>
   );
 };

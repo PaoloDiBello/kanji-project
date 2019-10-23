@@ -1,14 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-
-import { createStructuredSelector } from 'reselect'
 
 import { connect } from "react-redux";
 
 import itemsActions from "../../redux/items/actions";
 
 import {
+  selectItems,
   selectLoadingItems,
   selectItemsChunk
 } from "../../redux/items/selectors";
@@ -16,9 +15,6 @@ import {
 import Pagination from "material-ui-flat-pagination";
 
 import Item from './Item'
-import Skeleton from '@material-ui/lab/Skeleton';
-
-const {getItems} = itemsActions;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,12 +40,12 @@ const ListItemsPage = ({ items, getItems, loading, history }) => {
   return (
     <List className={classes.root}>
 
-      {items.length>0 ? <Pagination
+      <Pagination
         limit={10}
         offset={offset}
         total={items.length}
         onClick={(e, offset) => handleClick(offset)}
-      />: <Skeleton/>}
+      />
 
       {(loading || items.length === 0
         ? Array.from(new Array(3))

@@ -15,7 +15,7 @@ Object.defineProperty(Array.prototype, 'chunk', {value: function(n) {
 
 export const selectItemsChunk = createSelector(
     [selectItems],
-    (items) => items.chunk(3) 
+    (items) => items.chunk(6) 
 );
 
 export const selectLoadingItems = createSelector(

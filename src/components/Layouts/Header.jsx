@@ -11,8 +11,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   backHome: {
-    border: "none!important",
-    marginLeft: "auto"
+      marginLeft: "auto"
   }
 }));
 
