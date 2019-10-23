@@ -22,11 +22,16 @@ const { getItems } = itemsActions;
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2)
+  },
+    offset: {
+    ...theme.mixins.toolbar,
+    flexGrow: 1
   }
 }));
 
 const PaperSheet = ({ items, getItems, loading, history }) => {
   const classes = useStyles();
+
 
   useEffect(() => {
     getItems();
@@ -34,8 +39,8 @@ const PaperSheet = ({ items, getItems, loading, history }) => {
 
   return (
     <Paper className={classes.root}>
-      <Typography variant="h5" component="h3">
-        List of items {loading && <Spinner/>}
+      <Typography variant="h5" component="h3" className={classes.offset}>
+        List of items 
       </Typography>
 
       {(loading ? Array.from(new Array(3)) : items).map((item, index) => (

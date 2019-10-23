@@ -3,8 +3,6 @@ import './App.css';
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { Provider } from "react-redux";
-import { store, history } from "./redux/store";
 
 const ListItems = (
   lazy(() => (
@@ -27,10 +25,8 @@ const NotFound = (
 
 function App() {
 
-console.log('history', history)
 
   return (
-    <Provider store={store}>
       <BrowserRouter>
       <Suspense fallback={<>loading..</>}>
         <Switch>
@@ -41,7 +37,6 @@ console.log('history', history)
         </Switch>
         </Suspense>
       </BrowserRouter>
-      </Provider>
   );
 }
 

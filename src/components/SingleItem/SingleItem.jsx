@@ -41,7 +41,6 @@ if(item.kanji){
                 {english}
                 {character}
 
-                <img></img>
                 <Link
                   component="button"
                   variant="body2"
