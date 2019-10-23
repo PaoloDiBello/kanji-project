@@ -2,7 +2,7 @@ import { all, takeEvery, fork, put, call } from 'redux-saga/effects';
 import actions from './actions';
 //import fakeData from '../../containers/Jira/jira.data.json';
 import ItemsHelper from '../../helpers/itemsHelper';
-import { buildStateItems } from './helperSaga'
+//import { buildStateItems } from './helperSaga'
 
 
 export function* watchGetItems() {
@@ -24,7 +24,7 @@ export function* watchGetSingleItem() {
 }
 
 export function* doGetSingleItem({payload, history}) {
-  var item = [];
+
   const response = yield call(ItemsHelper.getSingleItem, payload );
 
   if(!response.error){

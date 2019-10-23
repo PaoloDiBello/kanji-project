@@ -24,5 +24,6 @@ const store = createStore(
   }),
   composeEnhancers(compose(applyMiddleware(...middlewares)))
 );
+
 sagaMiddleware.run(rootSaga);
 export { store, history };

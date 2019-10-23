@@ -1,77 +1,84 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 
-import itemsActions from '../../redux/items/actions'
+import itemsActions from "../../redux/items/actions";
 
-import { connect } from 'react-redux'
-import { Link } from '@material-ui/core'
-import Skeleton from '@material-ui/lab/Skeleton'
+import { connect } from "react-redux";
+import { Link } from "@material-ui/core";
+import Skeleton from "@material-ui/lab/Skeleton";
 
-import Spinner from '../Spinner.jsx'
+import Spinner from "../Spinner.jsx";
 
+const { getSingleItem } = itemsActions;
 
-const {getSingleItem} = itemsActions
+const SingleItem = ({ match, item, loading, getSingleItem, history }) => {
+  const {
+    params: { item: paramItem }
+  } = match;
 
-const SingleItem = ({match, item, loading, getSingleItem, history}) => {
-    
+  const encondedKanji = encodeURIComponent(paramItem);
 
-const {params:{item: paramItem}} = match;
+  useEffect(() => {
+    getSingleItem(encondedKanji, history);
+  }, [getSingleItem, encondedKanji, history]);
 
-const encondedKanji = encodeURIComponent(paramItem);
-
-    useEffect(() => {
-        getSingleItem(encondedKanji, history);
-    }, [getSingleItem, encondedKanji])
-
-
-
-if(item.kanji){
-
+  if (item.kanji) {
     var kanjiObject = item.kanji;
-    var {character, meaning: {english}, strokes, onyomi, kunyomi, video} = kanjiObject;
+    var {
+      character,
+      meaning: { english },
+      /*strokes,
+      onyomi,
+      kunyomi,*/
+      video
+    } = kanjiObject;
 
-//    var {kanji: {character, meaning: {english: meaningEnglish}, stokes: {count: numStrokes}}}= item;  
-  //  var {kanji: {onyomi: {romaji:romajiOnyomi, katakana}, kunyomi: {romaji:romajiKunyomi, hiragana}}} = item
-}
+    //    var {kanji: {character, meaning: {english: meaningEnglish}, stokes: {count: numStrokes}}}= item;
+    //  var {kanji: {onyomi: {romaji:romajiOnyomi, katakana}, kunyomi: {romaji:romajiKunyomi, hiragana}}} = item
+  
 
-
-    if(!loading && item.kanji){
-        return (
-            <div>
-                {english}
-                {character}
-
-                <img src={video.poster} alt="" style={{maxWidth: '50px'}}/>
-                <Link
-                  component="button"
-
-                  variant="body2"
-                  display="block"
-                  onClick={() => {
-                    history.push(`/`);
-                  }}
-                >
-                  Go home
-                </Link>
-
-            </div>
-        )
-    } else {
-        return (<><Spinner/><Skeleton width="40%"/><Skeleton width="40%"/></>)
-    }
 
 }
 
+  if (!loading && item.kanji) {
+    return (
+      <div>
+        {english}
+        {character}
 
-    const mapStateToProps = (state) => ({
-        item: state.Items.item,
-        loading: state.Items.loadingItem
-    })
+        <img src={video.poster} alt="" style={{ maxWidth: "50px" }} />
+        <Link
+          component="button"
+          variant="body2"
+          display="block"
+          onClick={() => {
+            history.push(`/`);
+          }}
+        >
+          Go home
+        </Link>
+      </div>
+    );
+  } else {
+    return (
+      <>
+        <Spinner />
+        <Skeleton width="40%" />
+        <Skeleton width="40%" />
+      </>
+    );
+  }
+};
 
-    
+const mapStateToProps = state => ({
+  item: state.Items.item,
+  loading: state.Items.loadingItem
+});
+
 const mapDispatchToProps = {
-    getSingleItem
-}
+  getSingleItem
+};
 
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(SingleItem)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleItem);

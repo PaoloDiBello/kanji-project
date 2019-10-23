@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText, Typography, Link } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 
-import Image from 'material-ui-image';
+//import Image from 'material-ui-image';
 
 const useStyles = makeStyles(theme => ({
   root: {

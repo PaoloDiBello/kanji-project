@@ -1,9 +1,22 @@
 import React from 'react'
 
-const NotFound = () => {
+import {Link} from '@material-ui/core'
+
+const NotFound = ({history}) => {
     return (
         <div>
-            Page not found 
+            Page not found or an error has occurred
+                            <Link
+                  component="button"
+                  variant="body2"
+                  display="block"
+                  onClick={() => {
+                    history.push(`/`);
+                  }}
+                >
+                  Go home
+                </Link>
+
         </div>
     )
 }
