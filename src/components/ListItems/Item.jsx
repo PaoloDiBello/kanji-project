@@ -10,7 +10,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 const Item = ({ item, history }) => {
   if (item) {
-    var { kanji, radical } = item;
+    var { kanji } = item;
   }
 
   return (
@@ -20,7 +20,9 @@ const Item = ({ item, history }) => {
       </ListItemAvatar>
       <ListItemText
         primary={item ? kanji.character : <Skeleton width="20%" />}
-        secondary={item ? `Number strokes: ${kanji.stroke}` : <Skeleton width="80%" />}
+        secondary={
+          item ? `Number strokes: ${kanji.stroke}` : <Skeleton width="80%" />
+        }
       />
       {item ? (
         <Button

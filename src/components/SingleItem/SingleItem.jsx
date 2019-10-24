@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
@@ -25,15 +24,13 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 const { getSingleItem } = itemsActions;
 
-
-
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: "100%"
   },
   media: {
-    width: "200px",
-    height: "200px"
+    width: "400px",
+    height: "400px"
   },
   expand: {
     transform: "rotate(0deg)",
@@ -49,42 +46,40 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: red[500]
   },
   button: {
-    margin: theme.spacing(1),
-  },
+    margin: theme.spacing(1)
+  }
 }));
 
 const SingleItem = ({ match, item, loading, getSingleItem, history }) => {
-   
-    const {
-      params: { item: paramItem }
-    } = match;
-  
-    const encondedKanji = encodeURIComponent(paramItem);
-  
-    React.useEffect(() => {
-      getSingleItem(encondedKanji, history);
-    }, [getSingleItem, encondedKanji, history]);
-  
-    if (item.kanji) {
-      var kanjiObject = item.kanji;
-      var {
-        character,
-        meaning: { english },
-        strokes,
-        onyomi,
-        kunyomi,
-        video,
-        examples
-      } = kanjiObject;
+  const {
+    params: { item: paramItem }
+  } = match;
 
-      var {romaji:romajiOnyomi, katakana} = onyomi; 
-      var {romaji:romajiKunyomi, hiragana} = kunyomi;
+  const encondedKanji = encodeURIComponent(paramItem);
 
-      //    var {kanji: {character, meaning: {english: meaningEnglish}, stokes: {count: numStrokes}}}= item;
-      //  var {kanji: {onyomi: {romaji:romajiOnyomi, katakana}, kunyomi: {romaji:romajiKunyomi, hiragana}}} = item
+  React.useEffect(() => {
+    getSingleItem(encondedKanji, history);
+  }, [getSingleItem, encondedKanji, history]);
+
+  if (item.kanji) {
+    var kanjiObject = item.kanji;
+    var {
+      character,
+      meaning: { english },
+      strokes,
+      onyomi,
+      kunyomi,
+      video
+    } = kanjiObject;
+
+    var { romaji: romajiOnyomi, katakana } = onyomi;
+    var { romaji: romajiKunyomi, hiragana } = kunyomi;
+
+    //    var {kanji: {character, meaning: {english: meaningEnglish}, stokes: {count: numStrokes}}}= item;
+    //  var {kanji: {onyomi: {romaji:romajiOnyomi, katakana}, kunyomi: {romaji:romajiKunyomi, hiragana}}} = item
   }
-   
-  const [startVideo, setStartVideo] = React.useState(false) 
+
+  const [startVideo, setStartVideo] = React.useState(false);
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -97,30 +92,47 @@ const SingleItem = ({ match, item, loading, getSingleItem, history }) => {
     <Card className={classes.card}>
       <CardHeader
         avatar={
-          item?<Avatar aria-label="recipe" className={classes.avatar}>
-            {character}
-          </Avatar>:<Skeleton variant="rect" width={210} height={118} />
-          }
+          item ? (
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              {character}
+            </Avatar>
+          ) : (
+            <Skeleton variant="rect" width={210} height={118} />
+          )
+        }
         title={english}
-        subheader={strokes?`Strokes: ${strokes.count}`:<Skeleton/>}
+        subheader={strokes ? `Strokes: ${strokes.count}` : <Skeleton />}
       />
 
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {item.kanji?(`onyomi: ${katakana} (${romajiOnyomi})`): <Skeleton/>}
+          {item.kanji ? `onyomi: ${katakana} (${romajiOnyomi})` : <Skeleton />}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-            {item.kanji?(`kunyomi: ${hiragana} (${romajiKunyomi})`): <Skeleton/>}
+          {item.kanji ? (
+            `kunyomi: ${hiragana} (${romajiKunyomi})`
+          ) : (
+            <Skeleton />
+          )}
         </Typography>
       </CardContent>
 
+      {item.kanji ? (
         <ReactPlayer
-          url={item.kanji?video.mp4:``}
+          url={item.kanji ? video.mp4 : ``}
           playing
           controls={startVideo}
         />
-          
-     <Button variant="contained" color="primary" className={classes.button} onClick={()=>setStartVideo(!startVideo)}>
+      ) : (
+        <Skeleton variant="rect" className={classes.media} />
+      )}
+
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={() => setStartVideo(!startVideo)}
+      >
         Show controls
       </Button>
 
@@ -146,38 +158,29 @@ const SingleItem = ({ match, item, loading, getSingleItem, history }) => {
         <CardContent>
           <Typography paragraph>Examples:</Typography>
 
-
-{item.kanji?item.examples.map(example => (<Typography>{`${example.japanese} ${example.meaning.english}`}</Typography>)):<></>
-}
-
-          <Typography>
-          "japanese": "一番（いちばん）",
-          "english": "number one"
-          </Typography>
-
-          <Typography>
-
-          "japanese": "一度（いちど）",
-          "english": "once"
-          </Typography>
+          {item.kanji ? (
+            item.examples.map(example => (
+              <Typography>{`${example.japanese} ${example.meaning.english}`}</Typography>
+            ))
+          ) : (
+            <Skeleton></Skeleton>
+          )}
         </CardContent>
       </Collapse>
     </Card>
   );
-}
-
+};
 
 const mapStateToProps = state => ({
-    item: state.Items.item,
-    loading: state.Items.loadingItem
-  });
-  
-  const mapDispatchToProps = {
-    getSingleItem
-  };
-  
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(SingleItem);
-  
+  item: state.Items.item,
+  loading: state.Items.loadingItem
+});
+
+const mapDispatchToProps = {
+  getSingleItem
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleItem);
