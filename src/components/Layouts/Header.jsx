@@ -5,35 +5,26 @@ import ReloadIcon from "@material-ui/icons/Cached";
 import Spinner from "../Spinner.jsx";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
   backHome: {
-      marginLeft: "auto"
+    marginLeft: "auto"
   }
 }));
 
-const Header = ({ loading, loading2 }) => {
+const Header = ({ loading, loading2, history, location }) => {
   const classes = useStyles();
 
-  const onClick = () => {
-    window.location.href = window.location.origin;
-  };
+  console.log("history", history);
 
   const reload = () => {
-
-    window.location.reload();
-  }
-
-
-  const [isHome, setIsHome] = useState("");
-
-  useEffect(() => {
-    const condition = !(window.location.pathname === "/");
-    setIsHome(condition);
-  }, [loading, loading2]);
+    history.go(`/`);
+  };
 
   return (
     <AppBar position="sticky">
@@ -45,14 +36,12 @@ const Header = ({ loading, loading2 }) => {
         <IconButton color="inherit" onClick={reload}>
           <ReloadIcon />
         </IconButton>
-
-        {isHome && (
-          <IconButton
-            color="inherit"
-            className={classes.backHome}
-            onClick={onClick}
-          >
-            <ArrowBackIcon />
+        {location.pathname}
+        {!(location.pathname === "/") && (
+          <IconButton color="inherit" className={classes.backHome}>
+            <Link href="/" color="inherit">
+              <ArrowBackIcon />
+            </Link>
           </IconButton>
         )}
       </Toolbar>
@@ -66,4 +55,4 @@ const mapStateToProps = state => ({
   loading2: state.Items.loadingItem
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(withRouter(Header));

@@ -1,9 +1,9 @@
-import itemsActions from './actions';
+import itemsActions from "./actions";
 
 const initState = {
   items: [],
   item: {},
-  itemsType: 'OPEN',
+  itemsType: "OPEN",
   loadingItems: false,
   loadingItem: false
 };
@@ -12,7 +12,6 @@ export default function itemsReducer(state = initState, action) {
   //const items = state.Items;
 
   switch (action.type) {
-
     case itemsActions.GET_ITEMS:
       return {
         ...state,
@@ -30,29 +29,27 @@ export default function itemsReducer(state = initState, action) {
       return {
         ...state,
         itemsType: action.payload
-      }
+      };
 
+    case itemsActions.GET_SINGLE_ITEM:
+      return {
+        ...state,
+        item: action.payload,
+        loadingItem: true
+      };
 
-      case itemsActions.GET_SINGLE_ITEM:
-        return {
-          ...state,
-          item: action.payload,
-          loadingItem: true
-        };
+    case itemsActions.GET_SINGLE_ITEM_SUCCESS:
+      return {
+        ...state,
+        item: action.payload,
+        loadingItem: false
+      };
 
-      case itemsActions.GET_SINGLE_ITEM_SUCCESS:
-        return {
-          ...state,
-          item: action.payload,
-          loadingItem: false
-        };
-  
-        case itemsActions.GET_SINGLE_ITEM_FAILED:
-          return {
-            ...state,
-            loadingItem: false
-          };
-  
+    case itemsActions.GET_SINGLE_ITEM_FAILED:
+      return {
+        ...state,
+        loadingItem: false
+      };
 
     default:
       return state;

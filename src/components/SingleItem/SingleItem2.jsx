@@ -7,7 +7,6 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 const { getSingleItem } = itemsActions;
 
-
 const SingleItem = ({ match, item, loading, getSingleItem, history }) => {
   const {
     params: { item: paramItem }
@@ -27,19 +26,19 @@ const SingleItem = ({ match, item, loading, getSingleItem, history }) => {
       /*strokes,
       onyomi,
       kunyomi,*/
-      video
+      item
     } = kanjiObject;
 
     //    var {kanji: {character, meaning: {english: meaningEnglish}, stokes: {count: numStrokes}}}= item;
     //  var {kanji: {onyomi: {romaji:romajiOnyomi, katakana}, kunyomi: {romaji:romajiKunyomi, hiragana}}} = item
-}
+  }
 
   if (!loading && item.kanji) {
     return (
       <div>
         {english}
         {character}
-        <img src={video.poster} alt="" style={{ maxWidth: "50px" }} />
+        <img src={item.poster} alt="" style={{ maxWidth: "50px" }} />
       </div>
     );
   } else {
