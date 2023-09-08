@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/kanji-project/static/css/main.d993f63f.css",
+    "main.js": "/kanji-project/static/js/main.65a82b6e.js",
+    "static/js/278.8cb4a894.chunk.js": "/kanji-project/static/js/278.8cb4a894.chunk.js",
+    "static/js/654.31cdbab1.chunk.js": "/kanji-project/static/js/654.31cdbab1.chunk.js",
+    "static/js/620.30b2d843.chunk.js": "/kanji-project/static/js/620.30b2d843.chunk.js",
+    "static/js/778.f0983e4e.chunk.js": "/kanji-project/static/js/778.f0983e4e.chunk.js",
+    "static/js/385.5bf37e29.chunk.js": "/kanji-project/static/js/385.5bf37e29.chunk.js",
+    "static/js/59.3db51560.chunk.js": "/kanji-project/static/js/59.3db51560.chunk.js",
+    "index.html": "/kanji-project/index.html",
+    "main.d993f63f.css.map": "/kanji-project/static/css/main.d993f63f.css.map",
+    "main.65a82b6e.js.map": "/kanji-project/static/js/main.65a82b6e.js.map",
+    "278.8cb4a894.chunk.js.map": "/kanji-project/static/js/278.8cb4a894.chunk.js.map",
+    "654.31cdbab1.chunk.js.map": "/kanji-project/static/js/654.31cdbab1.chunk.js.map",
+    "620.30b2d843.chunk.js.map": "/kanji-project/static/js/620.30b2d843.chunk.js.map",
+    "778.f0983e4e.chunk.js.map": "/kanji-project/static/js/778.f0983e4e.chunk.js.map",
+    "385.5bf37e29.chunk.js.map": "/kanji-project/static/js/385.5bf37e29.chunk.js.map",
+    "59.3db51560.chunk.js.map": "/kanji-project/static/js/59.3db51560.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d993f63f.css",
+    "static/js/main.65a82b6e.js"
+  ]
+}

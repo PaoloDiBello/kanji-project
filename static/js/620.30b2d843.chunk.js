@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkkanji_project=self.webpackChunkkanji_project||[]).push([[620],{6620:function(n,o,r){r.r(o);r(2791);var e=r(8455),c=r(184);o.default=function(n){var o=n.history;return(0,c.jsxs)("div",{children:["Page not found or an error has occurred",(0,c.jsx)(e.Z,{component:"button",variant:"body2",display:"block",onClick:function(){o.push("/")},children:"Go home"})]})}}}]);
+//# sourceMappingURL=620.30b2d843.chunk.js.map
