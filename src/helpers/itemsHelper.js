@@ -34,4 +34,6 @@ class ItemsHelper {
 
 }
 
-export default new ItemsHelper();
+const itemsHelper = new ItemsHelper();
+
+export default itemsHelper;

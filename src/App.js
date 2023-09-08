@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import "./App.css";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 const ListItems = lazy(() => import("./components/ListItems/ListItems"));
 

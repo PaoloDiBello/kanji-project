@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default () => {
+const Footer = () => {
   
   const classes = useStyles();
 
@@ -26,3 +26,5 @@ export default () => {
   </Typography>
   )
 }
+
+export default Footer;

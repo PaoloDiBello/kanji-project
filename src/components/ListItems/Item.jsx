@@ -10,7 +10,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 const Item = ({ item, history }) => {
   if (item) {
-    var { kanji, radical } = item;
+    var { kanji } = item;
   }
 
   return (

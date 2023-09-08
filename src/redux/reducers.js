@@ -1,4 +1,5 @@
 import Items from './items/reducer'
-export default {
+const reducers = {
     Items,
 };
+export default reducers;
